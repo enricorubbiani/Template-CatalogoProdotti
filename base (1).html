@@ -1,0 +1,23 @@
+
+<html>
+  <body>
+    <header>
+      <h1>Catalogo prodotti</h1>
+      <nav>
+        <a href="/prodotti">Lista Prodotti</a> |
+        <a href="/prodotti/new">Nuovo Prodotto</a>
+      </nav>
+      <hr>
+    </header>
+
+    <main>
+      {% block content %}{% end %}
+    </main>
+
+    <style>
+      body { font-family:Arial; margin:20px; }
+      nav a { margin-right:10px; }
+      main { margin-top:20px; }
+    </style>
+  </body>
+</html>

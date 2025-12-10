@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Catalogo prodotti</h2>
+
+<div>
+    <form method="post" action="/prodotti/filtro" style="display:inline;">
+        <select class="button-filtro" name="categoriafiltro">
+            <option value="Filtro">Nessuno</option>
+            <option value="Tech">Tech</option>
+            <option value="Abbigliamento">Abbigliamento</option>
+            <option value="Casa">Casa</option>
+        </select>
+
+        Disponibilità
+        <input type="checkbox" name="statofiltro">
+
+        <button class="button-filtro" type="submit">Filtra</button>
+    </form>
+</div>
+
+<h1></h1>
+
+{% if prodotti %}
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Prezzo (€)</th>
+            <th>Categoria</th>
+            <th>Stato</th>
+            <th>Elimina</th>
+            <th>Modifica</th>
+        </tr>
+
+        {% for p in prodotti %}
+        <tr>
+            <td>{{ p["nome"] }}</td>
+            <td>{{ p["prezzo"] }}</td>
+            <td>{{ p["categoria"] }}</td>
+
+            {% if p["stato"]=="on" %}
+            <td>Disponibile</td>
+            {% else %}
+            <td>Non disponibile</td>
+            {% end %}
+
+            <td>
+                <form method="post" action="/prodotti/delete/{{ p['id'] }}" style="display:inline;">
+                    <button class="button-elimina" type="submit">Elimina</button>
+                </form>
+            </td>
+
+            <td>
+                <form method="post" action="/prodotti/modifica/{{ p['id'] }}" style="display:inline;">
+                    <button class="button-modifica" type="submit">Modifica</button>
+                </form>
+            </td>
+        </tr>
+        {% end %}
+    </table>
+{% else %}
+    <p>Nessun prodotto presente.</p>
+{% end %}
+
+<style>
+
+    /* --- TABELLA --- */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 25px;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    th {
+        background-color: #523636;
+        color: white;
+        padding: 12px;
+        text-align: left;
+        font-size: 15px;
+    }
+
+    td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f7f4f4;
+    }
+
+    tr:hover {
+        background-color: #efeaea;
+        transition: 0.2s;
+    }
+
+
+    /* --- BOTTONI TABELLA --- */
+    .button-modifica {
+        padding: 6px 12px;
+        border: none;
+        background-color: #395237;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .button-modifica:hover {
+        background-color: #4e6d4a;
+        transform: translateY(-2px);
+    }
+
+    .button-elimina {
+        padding: 6px 12px;
+        border: none;
+        background-color: #801a18;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .button-elimina:hover {
+        background-color: #9e2a27;
+        transform: translateY(-2px);
+    }
+
+    .button-filtro {
+        padding: 7px 12px;
+        border: none;
+        background-color: #523636;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .button-filtro:hover {
+        background-color: #6b4747;
+        transform: translateY(-2px);
+    }
+
+    select.button-filtro {
+        background-color: #523636;
+        color: white;
+        border: none;
+        padding: 7px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    select.button-filtro:hover {
+        background-color: #6b4747;
+    }
+
+    /* Checkbox e select distanziati */
+    select, input[type="checkbox"] {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    form { display: inline; }
+</style>
+
+{% end %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Nuovo Prodotto</h2>
+
+<form method="post">
+  <label>Nome:</label>
+  <input type="text" name="nome" required>
+    <label>Prezzo:</label>
+  <input type="float" name="prezzo" required>
+    <label>Categoria:</label>
+  <select name="categoria">
+    <option value="Tech">Tech</option>
+    <option value="Abbigliamento">Abbigliamento</option>
+    <option value="Casa">Casa</option>
+  </select>
+    <label>Stato:</label>
+  <input type="checkbox" name="stato">
+
+  <button type="submit">Aggiungi</button>
+</form>
+
+<style>
+  form { display:flex; flex-direction:column; width:250px; gap:10px; }
+</style>
+{% end %}
